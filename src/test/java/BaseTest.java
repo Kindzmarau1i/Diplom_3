@@ -32,15 +32,16 @@ public abstract class BaseTest {
     }
 
     public WebDriver startYandex() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/nail_/chromedriver-win64/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", String.format("%s/%s", System.getenv("WEBDRIVERS"),
+                System.getenv("YANDEX_BROWSER_DRIVER_FILENAME")));
         ChromeOptions opts = new ChromeOptions();
-        opts.setBinary("C:/Users/nail_/AppData/Local/Yandex/YandexBrowser/Application/browser.exe");
+        opts.setBinary(System.getenv("YANDEX_BROWSER_PATH"));
         return new ChromeDriver(opts);
     }
 
     @Before
     public void open() {
-        driver = initDriver(CHROME);
+        driver = initDriver(YANDEX);
         driver.get(MAIN_URL);
         driver.manage().window().maximize();
     }
